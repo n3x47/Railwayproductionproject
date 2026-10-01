@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LaunchKit</title><style>
+body{margin:0;background:#07110d;color:#f3f8f4;font:16px system-ui;line-height:1.6}.wrap{max-width:900px;margin:auto;padding:30px 20px}.hero{padding:70px 0;text-align:center}h1{font-size:clamp(45px,8vw,78px);line-height:.98}.accent{color:#7cf29a}.card{background:#0d1b15;border:1px solid #20362a;border-radius:20px;padding:28px;margin:18px 0}.btn{display:inline-block;padding:14px 22px;border-radius:12px;background:#7cf29a;color:#061009;text-decoration:none;font-weight:700}.muted{color:#a7b9ae}input{padding:14px;border-radius:10px;border:1px solid #304737;background:#07110d;color:white;width:60%}button{padding:14px;border:0;border-radius:10px;background:#7cf29a;font-weight:700}
+</style></head><body><div class="wrap"><section class="hero"><p>LAUNCHKIT</p><h1>Build an offer.<br><span class="accent">Launch it.</span></h1><p class="muted">A practical digital starter kit for turning a useful skill into a simple online offer.</p><a id="buy" class="btn" href="#">Get LaunchKit — $29</a></section>
+<div class="card"><h2>What's inside</h2><p>Offer positioning worksheet · landing-page prompts · customer FAQ · outreach scripts · 7-day launch checklist · automation guide.</p></div>
+<div class="card"><h2>Get free launch resources</h2><form id="f"><input id="email" type="email" placeholder="you@example.com" required> <button>Join</button></form><p id="m" class="muted"></p></div>
+<div class="card"><p class="muted">Payments are processed by the configured payment provider. No earnings are guaranteed.</p></div></div>
+<script>
+const c=window.CONFIG||{};
+document.getElementById("buy").href=c.checkoutUrl||"#";
+document.getElementById("f").onsubmit=async e=>{e.preventDefault();let r=await fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email.value})});m.textContent=r.ok?"You're on the list.":"Please try again.";};
+</script><script src="/config.js"></script></body></html>

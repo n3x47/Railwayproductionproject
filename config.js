@@ -1,0 +1,1 @@
+window.CONFIG={checkoutUrl:"PASTE_STRIPE_PAYMENT_LINK"};
