@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import crypto from "crypto";
 import fs from "fs";
+import path from "path";
 
 const app=express();
 const PORT=process.env.PORT||3000;
@@ -23,6 +24,12 @@ function track(type,data={}) {
 }
 
 app.get("/health",(req,res)=>res.json({ok:true,service:"launchkit"}));
+
+app.get("/download",(req,res)=>{
+  const zipPath=path.join(process.cwd(),"launchkit-production.zip");
+  if(!fs.existsSync(zipPath)) return res.status(404).json({error:"Product file not found"});
+  res.download(zipPath,"launchkit-production.zip");
+});
 
 app.post("/api/leads", async (req,res)=>{
   const email=String(req.body?.email||"").trim().toLowerCase();
@@ -73,3 +80,4 @@ app.get("/api/cron/content",async(req,res)=>{
 });
 
 app.listen(PORT,()=>console.log(`LaunchKit running on ${PORT}`));
+
